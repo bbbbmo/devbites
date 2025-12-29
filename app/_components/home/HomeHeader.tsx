@@ -10,7 +10,7 @@ export default function HomeHeader() {
           <Mail className="w-6 h-6 text-primary-foreground" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-balance">IT 테크 큐레이터</h1>
+          <h1 className="text-xl font-bold text-balance">DevBites</h1>
           <p className="text-xs text-muted-foreground">
             매주 월요일 9시, 최신 기술 소식
           </p>
@@ -19,7 +19,7 @@ export default function HomeHeader() {
       <Button size="lg" className="gap-2">
         <>
           <Mail className="w-4 h-4" />
-          뉴스레터 구독
+          Subscribe
         </>
       </Button>
     </Header>
