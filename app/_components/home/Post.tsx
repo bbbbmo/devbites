@@ -24,7 +24,7 @@ export default function Post({ post }: { post: PostType }) {
     <Card onClick={goToPostDetail}>
       <CardHeader>
         <div className="flex justify-between mb-3">
-          <span className="text-sm ">{post.blogId}</span>
+          <span className="text-sm ">{post.blog.name}</span>
           <span className="text-sm text-muted-foreground flex items-center gap-2">
             <Calendar className="w-4 h-4" />
             {dayjs(post.publishedAt).format("YYYY-MM-DD")}

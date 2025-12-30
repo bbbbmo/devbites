@@ -6,9 +6,14 @@ import { Search } from "lucide-react";
 import Post from "./Post";
 import { useQuery } from "@tanstack/react-query";
 
+export type Blog = {
+  id: number;
+  name: string;
+};
+
 export type Post = {
   id: number;
-  blogId: number;
+  blog: Blog;
   title: string;
   shortSummary: string;
   detailedSummary: string;
@@ -24,7 +29,7 @@ export default function HomeMain() {
   const { data: posts } = useQuery<Post[]>({
     queryKey: ["posts"],
     queryFn: () => {
-      return fetch("http://localhost:3000/").then((res) => res.json());
+      return fetch("http://localhost:3000/post").then((res) => res.json());
     },
   });
 
