@@ -21,7 +21,7 @@ export type Post = {
 export default function HomeMain() {
   const tags = ["FE", "BE", "AI", "DevOps", "ETC"];
 
-  const { data: posts } = useQuery({
+  const { data: posts } = useQuery<Post[]>({
     queryKey: ["posts"],
     queryFn: () => {
       return fetch("http://localhost:3000/").then((res) => res.json());
@@ -70,7 +70,7 @@ export default function HomeMain() {
             총 <span className="font-bold">10</span>개의 글
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {posts.map((post: Post, index: number) => (
+            {posts?.map((post: Post, index: number) => (
               <Post key={index} post={post} />
             ))}
           </div>

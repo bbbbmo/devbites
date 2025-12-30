@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, ExternalLink, Tags } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Post as PostType } from "./HomeMain";
+import dayjs from "dayjs";
 
 export default function Post({ post }: { post: PostType }) {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function Post({ post }: { post: PostType }) {
           <span className="text-sm ">{post.blogId}</span>
           <span className="text-sm text-muted-foreground flex items-center gap-2">
             <Calendar className="w-4 h-4" />
-            {post.publishedAt}
+            {dayjs(post.publishedAt).format("YYYY-MM-DD")}
           </span>
         </div>
         <CardTitle>{post.title}</CardTitle>
