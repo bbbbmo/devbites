@@ -2,9 +2,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Post from "./Post";
+import { useQuery } from "@tanstack/react-query";
 
 export default function HomeMain() {
   const tags = ["FE", "BE", "AI", "DevOps", "ETC"];
+
+  const { data: posts } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => {
+      return fetch("http://localhost:3000/").then((res) => res.json());
+    },
+  });
+
+  console.log(posts);
 
   return (
     <main className="flex-1 w-full p-20 flex flex-col gap-20">
