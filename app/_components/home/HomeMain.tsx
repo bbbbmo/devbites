@@ -1,8 +1,22 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Post from "./Post";
 import { useQuery } from "@tanstack/react-query";
+
+export type Post = {
+  id: number;
+  blogId: number;
+  title: string;
+  shortSummary: string;
+  detailedSummary: string;
+  sourceUrl: string;
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+};
 
 export default function HomeMain() {
   const tags = ["FE", "BE", "AI", "DevOps", "ETC"];
@@ -56,8 +70,8 @@ export default function HomeMain() {
             총 <span className="font-bold">10</span>개의 글
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Array.from({ length: 10 }).map((_, index) => (
-              <Post key={index} />
+            {posts.map((post: Post, index: number) => (
+              <Post key={index} post={post} />
             ))}
           </div>
         </section>

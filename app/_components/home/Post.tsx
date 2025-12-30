@@ -10,28 +10,29 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Calendar, ExternalLink, Tags } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Post as PostType } from "./HomeMain";
 
-export default function Post() {
+export default function Post({ post }: { post: PostType }) {
   const router = useRouter();
 
   const goToPostDetail = () => {
-    router.push("/1");
+    router.push(`/${post.id}`);
   };
 
   return (
     <Card onClick={goToPostDetail}>
       <CardHeader>
         <div className="flex justify-between mb-3">
-          <span className="text-sm ">회사명</span>
+          <span className="text-sm ">{post.blogId}</span>
           <span className="text-sm text-muted-foreground flex items-center gap-2">
             <Calendar className="w-4 h-4" />
-            2025-01-01
+            {post.publishedAt}
           </span>
         </div>
-        <CardTitle>글 제목</CardTitle>
+        <CardTitle>{post.title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-muted-foreground">글 요약</p>
+        <p className="text-sm text-muted-foreground">{post.shortSummary}</p>
       </CardContent>
       <CardFooter>
         <div className="flex justify-between w-full">
