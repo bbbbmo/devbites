@@ -1,10 +1,18 @@
+import { getPostDetail } from "@/api/getPostDetail";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/ui/header";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, ExternalLink, Share2 } from "lucide-react";
 import Link from "next/link";
 
-export default function PostDetailPage() {
+export default async function PostDetailPage({
+  params,
+}: {
+  params: { postId: string };
+}) {
+  const { postId } = await params;
+  const post = await getPostDetail(Number(postId));
+
   return (
     <>
       <Header>
@@ -13,14 +21,21 @@ export default function PostDetailPage() {
           목록으로
         </Link>
       </Header>
-      <main className="flex-1 w-full py-20 px-80 flex flex-col gap-10">
+      <main className="flex-1 w-full py-20 px-[10%] lg:px-[20%] xl:px-[30%] flex flex-col gap-10">
         <section className="flex flex-col justify-center gap-4">
-          <h1 className="text-4xl font-bold">글 제목</h1>
-          <p className="text-md text-muted-foreground">글 요약</p>
+          <h1 className="text-4xl font-bold">{post.title}</h1>
+          <p className="text-md text-muted-foreground">{post.shortSummary}</p>
           <div className="flex gap-2">
-            <Button>
-              <ExternalLink className="w-4 h-4" />
-              원문 보기
+            <Button asChild>
+              <Link
+                href={post.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <ExternalLink className="w-4 h-4" />
+                원문 보기
+              </Link>
             </Button>
             <Button variant="outline" className=" gap-2">
               <Share2 />
