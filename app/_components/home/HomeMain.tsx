@@ -14,6 +14,10 @@ export type Blog = {
 
 export type Post = {
   id: number;
+  rssCategories: {
+    id: number;
+    name: string;
+  }[];
   blog: Blog;
   title: string;
   shortSummary: string;
