@@ -1,47 +1,22 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import Post from "./Post";
 import { useQuery } from "@tanstack/react-query";
-import { getPosts } from "@/api/getPosts";
-
-export type Blog = {
-  id: number;
-  name: string;
-};
-
-export type Post = {
-  id: number;
-  rssCategories: {
-    id: number;
-    name: string;
-  }[];
-  blog: Blog;
-  title: string;
-  shortSummary: string;
-  detailedSummary: string;
-  sourceUrl: string;
-  publishedAt: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import { getPosts, GetPostsResponse } from "@/api/getPosts";
+import BlogFilter from "./BlogFilter";
 
 export default function HomeMain() {
-  const tags = ["FE", "BE", "AI", "DevOps", "ETC"];
-
-  const { data: posts } = useQuery<Post[]>({
+  const { data: posts } = useQuery<GetPostsResponse[]>({
     queryKey: ["posts"],
-    queryFn: async () => await getPosts(),
+    queryFn: getPosts,
   });
 
-  console.log(posts);
-
   return (
-    <main className="flex-1 w-full p-20 flex flex-col gap-20">
-      <section className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-4xl font-bold">
+    <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-20 py-8 lg:py-20 flex flex-col gap-12 lg:gap-20">
+      <section className="flex flex-col items-center justify-center  gap-4">
+        <h1 className="text-4xl font-bold text-balance">
           최신 IT 기술 블로그를
           <br />
           한곳에서 읽어보세요
@@ -60,17 +35,11 @@ export default function HomeMain() {
             <Input
               type="text"
               placeholder="제목, 내용, 회사명으로 검색..."
-              className="pl-10"
+              className="pl-10 py-6"
             />
           </div>
 
-          <div className="flex gap-2">
-            {tags.map((tag) => (
-              <Button key={tag} size="lg">
-                {tag}
-              </Button>
-            ))}
-          </div>
+          <BlogFilter />
         </section>
 
         <section className="flex flex-col gap-4">
@@ -78,7 +47,7 @@ export default function HomeMain() {
             총 <span className="font-bold">{posts?.length || 0}</span>개의 글
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {posts?.map((post: Post, index: number) => (
+            {posts?.map((post, index: number) => (
               <Post key={index} post={post} />
             ))}
           </div>

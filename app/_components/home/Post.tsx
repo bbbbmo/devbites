@@ -10,12 +10,12 @@ import {
 
 import { Calendar, ExternalLink } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Post as PostType } from "./HomeMain";
+import { GetPostsResponse } from "@/api/getPosts";
 import dayjs from "dayjs";
 import CategoryTagList from "./CategoryTagList";
 import Link from "next/link";
 
-export default function Post({ post }: { post: PostType }) {
+export default function Post({ post }: { post: GetPostsResponse }) {
   const router = useRouter();
 
   const goToPostDetail = () => {
