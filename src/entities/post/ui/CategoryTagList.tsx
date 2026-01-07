@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/src/shared/ui/badge";
 import { Tags } from "lucide-react";
 
 export type CategoryTagListProps = {

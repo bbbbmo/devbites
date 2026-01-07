@@ -6,16 +6,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/src/shared/ui/card";
 
 import { Calendar, ExternalLink } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { GetPostsResponse } from "@/api/getPosts";
+import { GetPostsResponse } from "@/src/entities/post/api/getPosts";
 import dayjs from "dayjs";
 import CategoryTagList from "./CategoryTagList";
 import Link from "next/link";
 
-export default function Post({ post }: { post: GetPostsResponse }) {
+export default function PostCard({ post }: { post: GetPostsResponse }) {
   const router = useRouter();
 
   const goToPostDetail = () => {

@@ -1,5 +1,5 @@
-import { API_ENDPOINTS } from "./endpoint";
-import { GetBlogsResponse } from "./getBlogs";
+import { API_ENDPOINTS } from "../../../shared/api/endpoint";
+import { GetBlogsResponse } from "../../blog/api/getBlogs";
 
 export type GetPostsResponse = {
   id: number;

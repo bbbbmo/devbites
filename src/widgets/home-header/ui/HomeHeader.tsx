@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import Header from "@/components/ui/header";
+import { Button } from "@/src/shared/ui/button";
+import Header from "@/src/shared/ui/header";
 import { Mail } from "lucide-react";
 
 export default function HomeHeader() {

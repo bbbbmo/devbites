@@ -1,7 +1,7 @@
-import { getPostDetail } from "@/api/getPostDetail";
-import { Button } from "@/components/ui/button";
-import Header from "@/components/ui/header";
-import { Separator } from "@/components/ui/separator";
+import { getPostDetail } from "@/src/entities/post/api/getPostDetail";
+import { Button } from "@/src/shared/ui/button";
+import Header from "@/src/shared/ui/header";
+import { Separator } from "@/src/shared/ui/separator";
 import { ArrowLeft, ExternalLink, Share2 } from "lucide-react";
 import Link from "next/link";
 
