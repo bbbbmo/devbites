@@ -1,5 +1,7 @@
+import { API_ENDPOINTS } from "./endpoint";
+
 export async function getPosts() {
-  const res = await fetch(`http://localhost:3000/post`);
+  const res = await fetch(API_ENDPOINTS.POSTS);
   if (!res.ok) {
     throw new Error("Failed to fetch posts");
   }

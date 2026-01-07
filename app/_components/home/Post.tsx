@@ -19,7 +19,7 @@ export default function Post({ post }: { post: PostType }) {
   const router = useRouter();
 
   const goToPostDetail = () => {
-    router.push(`/${post.id}`);
+    router.push(`/post/${post.id}`);
   };
 
   return (

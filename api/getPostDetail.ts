@@ -1,5 +1,7 @@
+import { API_ENDPOINTS } from "./endpoint";
+
 export async function getPostDetail(postId: number) {
-  const res = await fetch(`http://localhost:3000/post/${postId}`);
+  const res = await fetch(API_ENDPOINTS.POST_DETAIL(postId));
 
   if (!res.ok) {
     throw new Error("Failed to fetch post");
