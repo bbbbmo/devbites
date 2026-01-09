@@ -1,3 +1,5 @@
+"use client";
+
 import { GetBlogsResponse, getBlogs } from "@/src/entities/blog/api/getBlogs";
 import { Badge } from "@/src/shared/ui/badge";
 import { useQuery } from "@tanstack/react-query";

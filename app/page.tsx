@@ -1,5 +1,8 @@
-import HomeHeader from "./_components/home/HomeHeader";
-import HomeMain from "./_components/home/HomeMain";
+import BlogFilter from "@/src/entities/post/ui/BlogFilter";
+import PostSearchResult from "@/src/entities/post/ui/PostSearchResult";
+import { Input } from "@/src/shared/ui/input";
+import HomeHeader from "@/src/widgets/home-header/ui/HomeHeader";
+import { Search } from "lucide-react";
 
 export default function Home() {
   return (
@@ -33,16 +36,7 @@ export default function Home() {
             <BlogFilter />
           </section>
 
-          <section className="flex flex-col gap-4">
-            <span>
-              총 <span className="font-bold">{posts?.length || 0}</span>개의 글
-            </span>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {posts?.map((post, index: number) => (
-                <Post key={index} post={post} />
-              ))}
-            </div>
-          </section>
+          <PostSearchResult />
         </div>
       </main>
     </div>
