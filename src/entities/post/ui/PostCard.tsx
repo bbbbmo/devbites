@@ -22,12 +22,17 @@ export default function PostCard({ post }: { post: GetPostsResponse }) {
     router.push(`/post/${post.id}`);
   };
 
+  const summary =
+    post.shortSummary.length > 150
+      ? post.shortSummary.slice(0, 150).replace(/`/g, "") + "..."
+      : post.shortSummary.replace(/`/g, "");
+
   return (
     <Card
-      className="cursor-pointer hover:shadow-md transition-all duration-300"
+      className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-primary/50 bg-card/80 backdrop-blur h-80 flex flex-col"
       onClick={goToPostDetail}
     >
-      <CardHeader>
+      <CardHeader className="shrink-0">
         <div className="flex justify-between mb-3">
           <span className="text-sm ">{post.blog.name}</span>
           <span className="text-sm text-muted-foreground flex items-center gap-2">
@@ -35,12 +40,14 @@ export default function PostCard({ post }: { post: GetPostsResponse }) {
             {dayjs(post.publishedAt).format("YYYY-MM-DD")}
           </span>
         </div>
-        <CardTitle>{post.title}</CardTitle>
+        <CardTitle className="group-hover:text-primary transition-colors">
+          {post.title}
+        </CardTitle>
       </CardHeader>
-      <CardContent>
-        <p className="text-sm text-muted-foreground ">{post.shortSummary}</p>
+      <CardContent className="flex-1 overflow-hidden flex flex-col min-h-0">
+        <p className="text-sm text-muted-foreground ">{summary}</p>
       </CardContent>
-      <CardFooter className="w-full justify-between items-end">
+      <CardFooter className="w-full justify-between items-end shrink-0">
         <CategoryTagList categories={post.rssCategories} />
         <Link
           href={post.sourceUrl}
