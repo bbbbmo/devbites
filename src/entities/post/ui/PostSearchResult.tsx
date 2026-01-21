@@ -10,10 +10,12 @@ import { SORT_OPTIONS } from "../config/sort-options.config";
 import { GetBlogsResponse } from "../../blog/api/getBlogs";
 
 type PostSearchResultProps = {
+  searchText: string;
   selectedBlog: GetBlogsResponse | null;
 };
 
 export default function PostSearchResult({
+  searchText,
   selectedBlog,
 }: PostSearchResultProps) {
   const [sort, setSort] = useState<PostSortType>("latest");
@@ -35,7 +37,7 @@ export default function PostSearchResult({
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setOpen((prev) => !prev)}
-            className="flex items-center gap-1 text-sm text-gray-600 hover:text-black"
+            className="flex items-center gap-1 text-sm text-gray-600 hover:text-black cursor-pointer"
           >
             <ListFilter className="w-4 h-4" />
             {SORT_OPTIONS.find((option) => option.value === sort)?.label}
