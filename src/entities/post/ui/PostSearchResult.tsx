@@ -24,6 +24,7 @@ export default function PostSearchResult({
   const { data: posts } = useQuery<GetPostsResponse[]>({
     queryKey: ["posts", sort, selectedBlog?.id],
     queryFn: async () => await getPosts({ sort, blogId: selectedBlog?.id }),
+    placeholderData: (previousData) => previousData, // TODO: 뭔지 알아보기
   });
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -49,8 +50,8 @@ export default function PostSearchResult({
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {posts?.map((post, index: number) => (
-          <PostCard key={index} post={post} />
+        {posts?.map((post) => (
+          <PostCard key={post.id} post={post} />
         ))}
       </div>
     </section>
