@@ -1,3 +1,4 @@
+import { buildQueryString } from "@/src/shared/lib/buildQueryString";
 import { API_ENDPOINTS } from "../../../shared/api/endpoint";
 import { GetBlogsResponse } from "../../blog/api/getBlogs";
 
@@ -17,10 +18,20 @@ export type GetPostsResponse = {
   updatedAt: string;
 };
 
-export async function getPosts(): Promise<GetPostsResponse[]> {
-  const res = await fetch(API_ENDPOINTS.POSTS);
+export type GetPostsParams = {
+  blogId?: number;
+  title?: string;
+  shortSummary?: string;
+}
+
+export async function getPosts(params: GetPostsParams): Promise<GetPostsResponse[]> {
+  const searchParams = buildQueryString(params);
+
+  const res = await fetch(`${API_ENDPOINTS.POSTS}?${searchParams}`);
+
   if (!res.ok) {
-    throw new Error("Failed to fetch posts");
+    throw new Error("블로그 글 목록을 불러오는데 실패했습니다.");
   }
+  
   return res.json();
 }
