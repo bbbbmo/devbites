@@ -1,10 +1,23 @@
+"use client";
+
+import { getBlogs, GetBlogsResponse } from "@/src/entities/blog/api/getBlogs";
 import BlogFilter from "@/src/entities/post/ui/BlogFilter";
 import PostSearchResult from "@/src/entities/post/ui/PostSearchResult";
 import { Input } from "@/src/shared/ui/input";
 import HomeHeader from "@/src/widgets/home-header/ui/HomeHeader";
+import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
+import { useState } from "react";
 
 export default function Home() {
+  const { data: blogs } = useQuery<GetBlogsResponse[]>({
+    queryKey: ["blogs"],
+    queryFn: getBlogs,
+  });
+
+  const [selectedBlog, setSelectedBlog] = useState<GetBlogsResponse | null>(
+    null
+  );
   return (
     <div className="flex flex-col min-h-screen">
       <HomeHeader />
@@ -33,10 +46,14 @@ export default function Home() {
               />
             </div>
 
-            <BlogFilter />
+            <BlogFilter
+              blogs={blogs}
+              selectedBlog={selectedBlog}
+              setSelectedBlog={setSelectedBlog}
+            />
           </section>
 
-          <PostSearchResult />
+          <PostSearchResult selectedBlog={selectedBlog} />
         </div>
       </main>
     </div>

@@ -7,14 +7,21 @@ import { ListFilter } from "lucide-react";
 import { useRef, useState } from "react";
 import SortOption from "./SortOption";
 import { SORT_OPTIONS } from "../config/sort-options.config";
+import { GetBlogsResponse } from "../../blog/api/getBlogs";
 
-export default function PostSearchResult() {
+type PostSearchResultProps = {
+  selectedBlog: GetBlogsResponse | null;
+};
+
+export default function PostSearchResult({
+  selectedBlog,
+}: PostSearchResultProps) {
   const [sort, setSort] = useState<PostSortType>("latest");
   const [open, setOpen] = useState(false);
 
   const { data: posts } = useQuery<GetPostsResponse[]>({
-    queryKey: ["posts", sort],
-    queryFn: async () => await getPosts({ sort }),
+    queryKey: ["posts", sort, selectedBlog?.id],
+    queryFn: async () => await getPosts({ sort, blogId: selectedBlog?.id }),
   });
 
   const dropdownRef = useRef<HTMLDivElement>(null);

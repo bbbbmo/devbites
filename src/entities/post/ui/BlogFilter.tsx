@@ -1,21 +1,19 @@
 "use client";
 
-import { GetBlogsResponse, getBlogs } from "@/src/entities/blog/api/getBlogs";
 import { Badge } from "@/src/shared/ui/badge";
-import { useQuery } from "@tanstack/react-query";
 import { Funnel } from "lucide-react";
-import { useState } from "react";
+import { GetBlogsResponse } from "../../blog/api/getBlogs";
 
-export default function BlogFilter() {
-  const { data: blogs } = useQuery<GetBlogsResponse[]>({
-    queryKey: ["blogs"],
-    queryFn: getBlogs,
-  });
-
-  const [selectedBlog, setSelectedBlog] = useState<GetBlogsResponse | null>(
-    null
-  );
-
+type BlogFilterProps = {
+  blogs: GetBlogsResponse[] | undefined;
+  selectedBlog: GetBlogsResponse | null;
+  setSelectedBlog: (blog: GetBlogsResponse | null) => void;
+};
+export default function BlogFilter({
+  blogs,
+  selectedBlog,
+  setSelectedBlog,
+}: BlogFilterProps) {
   return (
     <div className="flex flex-col gap-2">
       <span className="flex items-center gap-2 font-bold">
