@@ -18,14 +18,17 @@ export type GetPostsResponse = {
   updatedAt: string;
 };
 
+export type PostSortType = "latest" | "oldest";
+
 export type GetPostsParams = {
   blogId?: number;
   title?: string;
   shortSummary?: string;
+  sort?: PostSortType;
 }
 
-export async function getPosts(params: GetPostsParams): Promise<GetPostsResponse[]> {
-  const searchParams = buildQueryString(params);
+export async function getPosts(params?: GetPostsParams): Promise<GetPostsResponse[]> {
+  const searchParams = buildQueryString(params || {});
 
   const res = await fetch(`${API_ENDPOINTS.POSTS}?${searchParams}`);
 
