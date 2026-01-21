@@ -29,7 +29,7 @@ export default function PostCard({ post }: { post: GetPostsResponse }) {
 
   return (
     <Card
-      className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-primary/50 bg-card/80 backdrop-blur h-80 flex flex-col"
+      className="group hover:cursor-pointer overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border/50 hover:border-primary/50 bg-card/80 backdrop-blur h-80 flex flex-col"
       onClick={goToPostDetail}
     >
       <CardHeader className="shrink-0">
@@ -40,12 +40,12 @@ export default function PostCard({ post }: { post: GetPostsResponse }) {
             {dayjs(post.publishedAt).format("YYYY-MM-DD")}
           </span>
         </div>
-        <CardTitle className="group-hover:text-primary transition-colors">
+        <CardTitle className="group-hover:text-primary transition-colors line-clamp-2">
           {post.title}
         </CardTitle>
       </CardHeader>
       <CardContent className="flex-1 overflow-hidden flex flex-col min-h-0">
-        <p className="text-sm text-muted-foreground ">{summary}</p>
+        <p className="text-sm text-muted-foreground line-clamp-3">{summary}</p>
       </CardContent>
       <CardFooter className="w-full justify-between items-end shrink-0">
         <CategoryTagList categories={post.rssCategories} />

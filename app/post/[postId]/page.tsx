@@ -52,7 +52,7 @@ export default async function PostDetailPage({
 
         <Separator />
 
-        <section className="flex flex-col gap-8">
+        <section className="flex flex-col gap-4">
           <h5 className="text-2xl font-bold">요약</h5>
           <div className="text-md max-w-none">
             <ReactMarkdown components={markdownComponents}>
