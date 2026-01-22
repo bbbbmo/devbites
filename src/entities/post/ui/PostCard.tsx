@@ -52,6 +52,8 @@ export default function PostCard({ post }: { post: GetPostsResponse }) {
         <Link
           href={post.sourceUrl}
           target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
           className="hover:text-primary transition-all duration-300 shrink-0"
         >
           <ExternalLink className="w-4 h-4 ml-3" />

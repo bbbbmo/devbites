@@ -3,7 +3,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ExternalLink,
-  Link,
   TrendingUp,
 } from "lucide-react";
 import {
@@ -19,6 +18,7 @@ import { Button } from "@/src/shared/ui/button";
 import { useCallback, useEffect, useState } from "react";
 import { GetPostsResponse } from "../api/getPosts";
 import { Badge } from "@/src/shared/ui/badge";
+import Link from "next/link";
 
 type TrendingPostSectionProps = {
   trendingPosts: GetPostsResponse[];
@@ -85,9 +85,11 @@ export default function TrendingPostSection({
               <Link
                 href={trendingPosts[currentSlide].sourceUrl}
                 target="_blank"
-                className="hover:text-primary transition-all duration-300 shrink-0"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="hover:text-primary transition-all duration-300 shrink-0 flex items-center gap-2"
               >
-                <ExternalLink className="w-4 h-4 ml-3" />
+                <ExternalLink className="w-5 h-5 ml-3" />
               </Link>
             </CardFooter>
           </Card>
