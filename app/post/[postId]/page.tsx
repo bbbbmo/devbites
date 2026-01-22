@@ -43,7 +43,7 @@ export default async function PostDetailPage({
                 원문 보기
               </Link>
             </Button>
-            <Button variant="outline" className=" gap-2">
+            <Button variant="outline" className="gap-2">
               <Share2 />
               공유하기
             </Button>

@@ -1,32 +1,27 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getPosts, GetPostsResponse, PostSortType } from "../api/getPosts";
+import { GetPostsResponse, PostSortType } from "../api/getPosts";
 import PostCard from "./PostCard";
 import { ListFilter } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import SortOption from "./SortOption";
 import { SORT_OPTIONS } from "../config/sort-options.config";
-import { GetBlogsResponse } from "../../blog/api/getBlogs";
 
 type PostSearchResultProps = {
-  searchText: string;
-  selectedBlog: GetBlogsResponse | null;
+  posts: GetPostsResponse[];
+  sort: PostSortType;
+  setSort: (sort: PostSortType) => void;
+  open: boolean;
+  setOpen: (open: boolean) => void;
 };
 
 export default function PostSearchResult({
-  searchText,
-  selectedBlog,
+  posts,
+  sort,
+  setSort,
+  open,
+  setOpen,
 }: PostSearchResultProps) {
-  const [sort, setSort] = useState<PostSortType>("latest");
-  const [open, setOpen] = useState(false);
-
-  const { data: posts } = useQuery<GetPostsResponse[]>({
-    queryKey: ["posts", sort, selectedBlog?.id],
-    queryFn: async () => await getPosts({ sort, blogId: selectedBlog?.id }),
-    placeholderData: (previousData) => previousData, // TODO: 뭔지 알아보기
-  });
-
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -37,7 +32,7 @@ export default function PostSearchResult({
         </span>
         <div className="relative" ref={dropdownRef}>
           <button
-            onClick={() => setOpen((prev) => !prev)}
+            onClick={() => setOpen(!open)}
             className="flex items-center gap-1 text-sm text-gray-600 hover:text-black cursor-pointer"
           >
             <ListFilter className="w-4 h-4" />
