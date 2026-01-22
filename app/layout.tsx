@@ -1,4 +1,5 @@
 import QueryProvider from "./_providers/QueryProvider";
+import ThemeProvider from "./_providers/ThemeProvider";
 import "./globals.css";
 
 export default function RootLayout({
@@ -9,7 +10,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="h-screen w-full">
-        <QueryProvider>{children}</QueryProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <QueryProvider>{children}</QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

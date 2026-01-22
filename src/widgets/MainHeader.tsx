@@ -1,8 +1,9 @@
 import { Button } from "@/src/shared/ui/button";
 import Header from "@/src/shared/ui/header";
 import { Mail } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
-export default function HomeHeader() {
+export default function MainHeader() {
   return (
     <Header>
       <div className="flex items-center gap-3">
@@ -16,12 +17,13 @@ export default function HomeHeader() {
           </p>
         </div>
       </div>
-      <Button size="lg" className="gap-2">
-        <>
+      <div className="flex items-center gap-2">
+        <ThemeToggle />
+        <Button size="lg" className="gap-2">
           <Mail className="w-4 h-4" />
           Subscribe
-        </>
-      </Button>
+        </Button>
+      </div>
     </Header>
   );
 }
