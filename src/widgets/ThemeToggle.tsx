@@ -9,7 +9,12 @@ export function ThemeToggle() {
 
   if (!resolvedTheme) {
     return (
-      <Button variant="outline" size="lg" className="h-9 w-9">
+      <Button
+        variant="outline"
+        size="lg"
+        className="h-9 w-9"
+        suppressHydrationWarning // 서버/클라이언트 불일치 경고 억제
+      >
         <Sun className="h-4 w-4" />
       </Button>
     );

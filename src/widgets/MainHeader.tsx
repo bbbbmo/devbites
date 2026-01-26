@@ -12,9 +12,6 @@ export default function MainHeader() {
         </div>
         <div>
           <h1 className="text-xl font-bold text-balance">DevBites</h1>
-          <p className="text-xs text-muted-foreground">
-            매주 월요일 9시, 최신 기술 소식
-          </p>
         </div>
       </div>
       <div className="flex items-center gap-2">
