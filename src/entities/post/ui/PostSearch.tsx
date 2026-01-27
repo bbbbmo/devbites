@@ -5,8 +5,9 @@ import { getBlogs, GetBlogsResponse } from "../../blog/api/getBlogs";
 import { useState } from "react";
 import PostSearchResult from "./PostSearchResult";
 import { getPosts, GetPostsResponse, PostSortType } from "../api/getPosts";
-import TrendingPostSection from "./TrendingPostSection";
+import TrendingPostCard from "./TrendingPostCard";
 import SearchSection from "./SearchSection";
+import { TrendingUp } from "lucide-react";
 
 export default function PostSearch() {
   const [searchText, setSearchText] = useState("");
@@ -21,11 +22,6 @@ export default function PostSearch() {
     queryFn: getBlogs,
   });
 
-  const { data: trendingPosts } = useQuery<GetPostsResponse[]>({
-    queryKey: ["trending-posts"], // TODO: 추후 백엔드에서 트렌드 게시물 조회 기능 추가 시 수정
-    queryFn: () => getPosts(),
-  });
-
   const { data: posts } = useQuery<GetPostsResponse[]>({
     queryKey: ["posts", sort, selectedBlog?.id],
     queryFn: async () => await getPosts({ sort, blogId: selectedBlog?.id }),
@@ -34,8 +30,14 @@ export default function PostSearch() {
 
   return (
     <>
-      <div className="flex gap-8">
-        <TrendingPostSection trendingPosts={trendingPosts?.slice(0, 5) || []} />
+      <div className="flex gap-8 lg:flex-row flex-col">
+        <section className="flex flex-col gap-4 lg:max-w-2xl w-full">
+          <div className="flex items-center gap-2">
+            <TrendingUp className="w-5 h-5 text-primary" />
+            <h5 className="text-xl font-bold text-balance">실시간 트렌드</h5>
+          </div>
+          <TrendingPostCard />
+        </section>
         <SearchSection
           searchText={searchText}
           setSearchText={setSearchText}

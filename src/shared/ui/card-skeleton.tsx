@@ -10,7 +10,7 @@ function CardSkeleton({ className }: { className: string }) {
         <Skeleton className="h-4 w-1/2 block" />
       </CardHeader>
       <CardContent className="flex-1 w-full overflow-hidden flex flex-col min-h-0">
-        <Skeleton className="block w-full" />
+        <Skeleton className="block w-full h-full" />
       </CardContent>
     </Card>
   );

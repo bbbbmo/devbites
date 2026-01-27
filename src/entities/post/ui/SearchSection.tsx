@@ -24,7 +24,7 @@ export default function SearchSection({
         <Search className="w-5 h-5 text-primary" />
         <h5 className="text-xl font-bold text-balance">검색</h5>
       </div>
-      <div className="relative w-full max-w-xl mx-auto">
+      <div className="relative w-full">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
         <Input
           type="text"
