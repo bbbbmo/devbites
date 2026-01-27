@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from "@/src/shared/api/endpoint";
+import { API_ENDPOINTS } from "@/src/shared/config/endpoint";
 
 export async function getPostDetail(postId: number) {
   const res = await fetch(API_ENDPOINTS.POST_DETAIL(postId));

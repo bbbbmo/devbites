@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from "../../../shared/api/endpoint";
+import { API_ENDPOINTS } from "@/src/shared/config/endpoint";
 
 export type GetBlogsResponse = {
   id: number;
