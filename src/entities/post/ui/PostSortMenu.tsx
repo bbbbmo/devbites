@@ -32,7 +32,7 @@ export default function PostSortMenu({ sort, setSort }: PostSortMenuProps) {
           >
             {option.label}
             {sort === option.value && (
-              <Check className="size-2 text-blue-500" />
+              <Check className="size-4 text-blue-500" />
             )}
           </DropdownMenuItem>
         ))}
