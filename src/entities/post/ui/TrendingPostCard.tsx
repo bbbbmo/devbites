@@ -27,13 +27,12 @@ export default function TrendingPostCard() {
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
-  const { data: trendingPosts = [], isLoading } = useQuery<GetPostsResponse[]>({
+  const { data, isLoading } = useQuery<GetPostsResponse>({
     queryKey: ["trending-posts"], // TODO: 추후 백엔드에서 트렌드 게시물 조회 기능 추가 시 수정
-    queryFn: async () => {
-      const result = await getPosts();
-      return result.slice(0, 5);
-    },
+    queryFn: async () => await getPosts({ size: 5, sort: "latest" }),
   });
+
+  const trendingPosts = data?.items || [];
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % trendingPosts.length);
@@ -57,7 +56,7 @@ export default function TrendingPostCard() {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || trendingPosts.length === 0 ? (
         <CardSkeleton className="h-72" />
       ) : (
         <Card

@@ -1,6 +1,6 @@
 "use client";
 
-import { GetPostsResponse, PostSortType } from "../api/getPosts";
+import { GetPostsResponseItems, PostSortType } from "../api/getPosts";
 import PostCard from "./PostCard";
 import { ListFilter } from "lucide-react";
 import { useRef } from "react";
@@ -8,7 +8,7 @@ import SortOption from "./SortOption";
 import { SORT_OPTIONS } from "../config/sort-options.config";
 
 type PostSearchResultProps = {
-  posts: GetPostsResponse[];
+  posts: GetPostsResponseItems[];
   sort: PostSortType;
   setSort: (sort: PostSortType) => void;
   open: boolean;
