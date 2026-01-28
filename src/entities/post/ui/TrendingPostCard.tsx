@@ -21,14 +21,14 @@ import { getPosts, GetPostsResponse } from "../api/getPosts";
 import { Badge } from "@/src/shared/ui/badge";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { CardSkeleton } from "@/src/shared/ui/card-skeleton";
+import { CardSkeleton } from "@/src/shared/ui/skeleton/card-skeleton";
 
 export default function TrendingPostCard() {
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const { data, isLoading } = useQuery<GetPostsResponse>({
-    queryKey: ["trending-posts"], // TODO: 추후 백엔드에서 트렌드 게시물 조회 기능 추가 시 수정
+    queryKey: ["post"], // TODO: 추후 백엔드에서 트렌드 게시물 조회 기능 추가 시 수정
     queryFn: async () => await getPosts({ size: 5, sort: "latest" }),
   });
 

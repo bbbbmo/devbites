@@ -1,5 +1,5 @@
-import { cn } from "../lib/utils";
-import { Card, CardContent, CardHeader } from "./card";
+import { cn } from "../../lib/utils";
+import { Card, CardContent, CardHeader } from "../card";
 import { Skeleton } from "./skeleton";
 
 function CardSkeleton({ className }: { className: string }) {

@@ -2,13 +2,15 @@
 
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { getBlogs, GetBlogsResponse } from "../../blog/api/getBlogs";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import PostSearchResult from "./PostSearchResult";
 import { getPosts, GetPostsResponse, PostSortType } from "../api/getPosts";
 import TrendingPostCard from "./TrendingPostCard";
 import SearchInput from "./SearchInput";
-import { Search, TrendingUp } from "lucide-react";
+import { Funnel, Search, TrendingUp } from "lucide-react";
 import BlogFilter from "./BlogFilter";
+import { Badge } from "@/src/shared/ui/badge";
+import { BadgeSkeleton } from "@/src/shared/ui/skeleton/badge-skeleton";
 
 export default function PostSearch() {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -20,18 +22,13 @@ export default function PostSearch() {
   const [sort, setSort] = useState<PostSortType>("latest");
   const [open, setOpen] = useState(false);
 
-  const { data: blogs } = useQuery<GetBlogsResponse[]>({
-    queryKey: ["blogs"],
-    queryFn: getBlogs,
-  });
-
   const {
     data: posts,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery<GetPostsResponse>({
-    queryKey: ["posts", sort, selectedBlog?.id],
+    queryKey: ["post", sort, selectedBlog?.id],
     queryFn: async ({ pageParam = 1 }) =>
       await getPosts({
         sort,
@@ -77,11 +74,17 @@ export default function PostSearch() {
             <h5 className="text-xl font-bold text-balance">검색</h5>
           </div>
           <SearchInput searchText={searchText} setSearchText={setSearchText} />
-          <BlogFilter
-            blogs={blogs}
-            selectedBlog={selectedBlog}
-            setSelectedBlog={setSelectedBlog}
-          />
+          <div className="flex flex-col gap-2">
+            <span className="flex items-center gap-2 font-bold">
+              <Funnel className="w-4 h-4" /> 블로그
+            </span>
+            <Suspense fallback={<BadgeSkeleton />}>
+              <BlogFilter
+                selectedBlog={selectedBlog}
+                setSelectedBlog={setSelectedBlog}
+              />
+            </Suspense>
+          </div>
         </section>
       </div>
 
