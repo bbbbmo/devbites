@@ -1,16 +1,16 @@
 "use client";
 
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { getBlogs, GetBlogsResponse } from "../../blog/api/getBlogs";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { GetBlogsResponse } from "../../blog/api/getBlogs";
 import { Suspense, useEffect, useRef, useState } from "react";
-import PostSearchResult from "./PostSearchResult";
 import { getPosts, GetPostsResponse, PostSortType } from "../api/getPosts";
 import TrendingPostCard from "./TrendingPostCard";
 import SearchInput from "./SearchInput";
 import { Funnel, Search, TrendingUp } from "lucide-react";
 import BlogFilter from "./BlogFilter";
-import { Badge } from "@/src/shared/ui/badge";
 import { BadgeSkeleton } from "@/src/shared/ui/skeleton/badge-skeleton";
+import PostCard from "./PostCard";
+import PostSortMenu from "./PostSortMenu";
 
 export default function PostSearch() {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -20,7 +20,6 @@ export default function PostSearch() {
     null
   );
   const [sort, setSort] = useState<PostSortType>("latest");
-  const [open, setOpen] = useState(false);
 
   const {
     data: posts,
@@ -39,6 +38,7 @@ export default function PostSearch() {
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) =>
       lastPage.hasMore ? pages.length + 1 : undefined,
+    placeholderData: (previousData) => previousData,
   });
 
   const allPosts = posts?.pages.flatMap((page) => page.items) ?? [];
@@ -88,13 +88,19 @@ export default function PostSearch() {
         </section>
       </div>
 
-      <PostSearchResult
-        posts={allPosts}
-        sort={sort}
-        setSort={setSort}
-        open={open}
-        setOpen={setOpen}
-      />
+      <section className="flex flex-col gap-4">
+        <div className="flex justify-between items-center">
+          <span>
+            총 <span className="font-bold">{allPosts?.length || 0}</span>개의 글
+          </span>
+          <PostSortMenu sort={sort} setSort={setSort} />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {allPosts?.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
+        </div>
+      </section>
 
       <div ref={loadMoreRef} className="h-4" />
       {isFetchingNextPage && (
