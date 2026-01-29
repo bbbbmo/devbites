@@ -2,13 +2,12 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { GetBlogsResponse } from "../../blog/api/getBlogs";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getPosts, GetPostsResponse, PostSortType } from "../api/getPosts";
 import TrendingPostCard from "./TrendingPostCard";
 import SearchInput from "./SearchInput";
 import { Funnel, Search, TrendingUp } from "lucide-react";
 import BlogFilter from "./BlogFilter";
-import { BadgeSkeleton } from "@/src/shared/ui/skeleton/badge-skeleton";
 import PostCard from "./PostCard";
 import PostSortMenu from "./PostSortMenu";
 import { CardSkeleton } from "@/src/shared/ui/skeleton/card-skeleton";

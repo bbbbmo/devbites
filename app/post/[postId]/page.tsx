@@ -4,7 +4,7 @@ import { Button } from "@/src/shared/ui/button";
 import Header from "@/src/shared/ui/header";
 import { Separator } from "@/src/shared/ui/separator";
 import ShareButton from "@/src/shared/ui/share-button";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, Sparkles } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
@@ -51,7 +51,10 @@ export default async function PostDetailPage({
         <Separator />
 
         <section className="flex flex-col gap-4">
-          <h5 className="text-2xl font-bold">요약</h5>
+          <h5 className="flex items-center gap-2 scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+            <Sparkles className="w-6 h-6 text-primary" />
+            AI 요약
+          </h5>
           <div className="text-md max-w-none">
             <ReactMarkdown components={markdownComponents}>
               {post.detailedSummary}

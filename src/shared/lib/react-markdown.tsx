@@ -2,7 +2,10 @@ import { Components } from "react-markdown";
 
 export const markdownComponents: Partial<Components> = {
   h3: ({ ...props }) => (
-    <h3 className="text-xl font-bold mt-6 mb-4" {...props} />
+    <h3
+      className="scroll-m-20 text-xl font-semibold tracking-tight mt-6 mb-4"
+      {...props}
+    />
   ),
   pre: ({ ...props }) => (
     <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-4" {...props} />

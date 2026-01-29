@@ -14,7 +14,7 @@ export default function CategoryTagList({ categories }: CategoryTagListProps) {
       {categories.map((category) => (
         <Badge
           key={category.id}
-          className="flex items-center gap-2 hover:cursor-pointer  hover:bg-primary/80 hover:text-primary-foreground transition-all duration-200 hover:scale-105"
+          className="flex items-center gap-2 hover:cursor-pointer hover:bg-primary/50 hover:text-primary-foreground transition-all duration-200 hover:scale-105"
           variant="secondary"
         >
           <Tags className="w-4 h-4" />
