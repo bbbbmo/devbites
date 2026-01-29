@@ -1,10 +1,11 @@
 import { getPostDetail } from "@/src/entities/post/api/getPostDetail";
 import { markdownComponents } from "@/src/shared/lib/react-markdown";
+import BackButton from "@/src/shared/ui/back-button";
 import { Button } from "@/src/shared/ui/button";
 import Header from "@/src/shared/ui/header";
 import { Separator } from "@/src/shared/ui/separator";
 import ShareButton from "@/src/shared/ui/share-button";
-import { ArrowLeft, ExternalLink, Sparkles } from "lucide-react";
+import { ExternalLink, Sparkles } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
@@ -19,10 +20,7 @@ export default async function PostDetailPage({
   return (
     <>
       <Header>
-        <Link className="flex items-center gap-3" href="/">
-          <ArrowLeft className="w-4 h-4" />
-          목록으로
-        </Link>
+        <BackButton href="/" text="목록으로" />
       </Header>
       <main className="flex-1 w-full py-20 px-[10%] lg:px-[20%] xl:px-[30%] flex flex-col gap-10">
         <section className="flex flex-col justify-center gap-4">
