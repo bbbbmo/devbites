@@ -80,12 +80,10 @@ export default function PostSearch() {
             <span className="flex items-center gap-2 font-bold">
               <Funnel className="w-4 h-4" /> 블로그
             </span>
-            <Suspense fallback={<BadgeSkeleton />}>
-              <BlogFilter
-                selectedBlog={selectedBlog}
-                setSelectedBlog={setSelectedBlog}
-              />
-            </Suspense>
+            <BlogFilter
+              selectedBlog={selectedBlog}
+              setSelectedBlog={setSelectedBlog}
+            />
           </div>
         </section>
       </div>
