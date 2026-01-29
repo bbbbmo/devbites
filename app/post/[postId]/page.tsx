@@ -3,7 +3,8 @@ import { markdownComponents } from "@/src/shared/lib/react-markdown";
 import { Button } from "@/src/shared/ui/button";
 import Header from "@/src/shared/ui/header";
 import { Separator } from "@/src/shared/ui/separator";
-import { ArrowLeft, ExternalLink, Share2 } from "lucide-react";
+import ShareButton from "@/src/shared/ui/share-button";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
@@ -43,10 +44,7 @@ export default async function PostDetailPage({
                 원문 보기
               </Link>
             </Button>
-            <Button variant="outline" className="gap-2">
-              <Share2 />
-              공유하기
-            </Button>
+            <ShareButton />
           </div>
         </section>
 
