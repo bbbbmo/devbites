@@ -2,7 +2,7 @@ import { buildQueryString } from "@/src/shared/lib/buildQueryString";
 import { API_ENDPOINTS } from "@/src/shared/config/endpoint";
 import { GetBlogsResponse } from "../../blog/api/getBlogs";
 
-export type GetPostsResponse = {
+export type GetPostsResponseItems = {
   id: number;
   rssCategories: {
     id: number;
@@ -18,6 +18,12 @@ export type GetPostsResponse = {
   updatedAt: string;
 };
 
+export type GetPostsResponse = {
+  items: GetPostsResponseItems[];
+  page: number;
+  hasMore: boolean;
+};
+
 export type PostSortType = "latest" | "oldest";
 
 export type GetPostsParams = {
@@ -25,11 +31,13 @@ export type GetPostsParams = {
   title?: string;
   shortSummary?: string;
   sort?: PostSortType;
+  page?: number;
+  size?: number;
 };
 
 export async function getPosts(
   params?: GetPostsParams
-): Promise<GetPostsResponse[]> {
+): Promise<GetPostsResponse> {
   const searchParams = buildQueryString(params || {});
 
   const res = await fetch(`${API_ENDPOINTS.POSTS}?${searchParams}`);
