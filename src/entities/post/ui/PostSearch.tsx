@@ -35,7 +35,7 @@ export default function PostSearch() {
         sort,
         blogId: selectedBlog?.id,
         page: pageParam as number,
-        size: 20,
+        size: 18,
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) =>
