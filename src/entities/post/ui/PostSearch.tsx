@@ -11,6 +11,7 @@ import BlogFilter from "./BlogFilter";
 import { BadgeSkeleton } from "@/src/shared/ui/skeleton/badge-skeleton";
 import PostCard from "./PostCard";
 import PostSortMenu from "./PostSortMenu";
+import { CardSkeleton } from "@/src/shared/ui/skeleton/card-skeleton";
 
 export default function PostSearch() {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -26,6 +27,7 @@ export default function PostSearch() {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isLoading,
   } = useInfiniteQuery<GetPostsResponse>({
     queryKey: ["post", sort, selectedBlog?.id],
     queryFn: async ({ pageParam = 1 }) =>
@@ -91,14 +93,17 @@ export default function PostSearch() {
       <section className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <span>
-            총 <span className="font-bold">{allPosts?.length || 0}</span>개의 글
+            총 <span className="font-bold">{posts?.pages[0].total || 0}</span>
+            개의 글
           </span>
           <PostSortMenu sort={sort} setSort={setSort} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {allPosts?.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
+          {!allPosts || isLoading
+            ? Array.from({ length: 10 }).map((_, index) => (
+                <CardSkeleton key={index} className="h-80" />
+              ))
+            : allPosts.map((post) => <PostCard key={post.id} post={post} />)}
         </div>
       </section>
 

@@ -4,7 +4,7 @@ import { Skeleton } from "./skeleton";
 
 function CardSkeleton({ className }: { className: string }) {
   return (
-    <Card className={cn("animate-pulse rounded-md", className)}>
+    <Card className={cn("animate-pulse", className)}>
       <CardHeader>
         <Skeleton className="h-4 w-2/3 block" />
         <Skeleton className="h-4 w-1/2 block" />

@@ -20,7 +20,7 @@ export type GetPostsResponseItems = {
 
 export type GetPostsResponse = {
   items: GetPostsResponseItems[];
-  page: number;
+  total: number;
   hasMore: boolean;
 };
 
